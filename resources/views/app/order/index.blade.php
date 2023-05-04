@@ -87,7 +87,7 @@
 
                     <div class="container-fluid text-center mt-3">
 
-                        {{ $orders->appends($request)->links('app.layouts._partials.pagination') }}
+                        {{ $orders->links('app.layouts._partials.pagination') }}
 
                         <p>
                             Exibindo {{ $orders->count() }} pedido(s) de {{ $orders->total() }} (de

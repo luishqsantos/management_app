@@ -9,6 +9,8 @@ class ProviderService
 {
     public function search($search): LengthAwarePaginator
     {
+        $search = strip_tags(trim($search));
+        
         return Provider::with(['products'])
             ->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%')

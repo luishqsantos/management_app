@@ -35,8 +35,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        //$orders = Order::with(['products','client', 'products.productStock'])->orderByDesc('id')->paginate(10);
-
+        
         $search = $request->query('search');
         $orders = $this->orderService->search($search);
 
