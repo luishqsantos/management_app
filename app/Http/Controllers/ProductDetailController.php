@@ -10,16 +10,6 @@ use Illuminate\Http\Request;
 class ProductDetailController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return View
@@ -42,17 +32,6 @@ class ProductDetailController extends Controller
 
         session()->flash('message', 'Detalhe do Produto cadastrado com sucesso');
         return $this->create();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -80,16 +59,5 @@ class ProductDetailController extends Controller
 
         session()->flash('message', 'Detalhe do Produto editado com sucesso');
         return $this->edit($product_detail);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

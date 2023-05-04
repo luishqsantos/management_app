@@ -9,7 +9,7 @@
             <div class="p-4 p-md-5 mb-4 rounded text-bg-dark" >
                 <div class="col-md-6 px-0">
                     <h1 class="display-4 fst-italic text-white">Super Gestão</h1>
-                    <p class="lead my-3 text-grey">O Super Gestão é um sistema web altamente eficiente e completo, que tem
+                    <p class="lead my-3 text-grey">O Super Gestão é um ERP altamente eficiente e completo, que tem
                         como
                         objetivo principal o gerenciamento eficaz de estoque, produtos, fornecedores, pedidos e clientes
                         em

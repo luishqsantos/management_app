@@ -9,7 +9,7 @@
         </div>
 
         <div class="informacao-pagina">
-            <p>O <strong>Super Gestão</strong> é um sistema web altamente eficiente e completo, que tem como objetivo
+            <p>O <strong>Super Gestão</strong> é um ERP altamente eficiente e completo, que tem como objetivo
                 principal o gerenciamento eficaz de estoque, produtos, fornecedores, pedidos e clientes em um ambiente
                 empresarial. Desenvolvido com tecnologias de ponta, este sistema permite que empresas de diferentes portes e
                 segmentos possam gerenciar de forma simples e intuitiva todas as operações relacionadas a estoque, produtos,
