@@ -32,6 +32,10 @@
                 <div class="card-header">
                     <h5 class="card-title mb-0">Lista de Pedidos</h5>
                 </div>
+
+                @component('app.layouts._partials.search')
+                @endcomponent
+
                 <div class="table-responsive">
                     <table class="table table-hover my-0">
                         <thead>
@@ -52,7 +56,7 @@
                                     <td>{{ $order->products->count() }}</td>
                                     <td> R$ {{ number_format($order->products->sum('pivot.total'), '2', ',', '.') }}
                                     </td>
-                                    <td class="d-none d-md-table-cell">{{ $order->created_at->format('d M Y H:i:s') }}</td>
+                                    <td class="d-none d-md-table-cell">{{ $order->created_at->format('d-m-y H:i') }}</td>
                                     <td>
                                         <div class="btn-group dropstart">
                                             <a class="btn btn-secondary btn-sm dropdown-toggle" href="#"
