@@ -9,6 +9,8 @@ class ProductService
 {
     public function search($search): LengthAwarePaginator
     {
+        $search = strip_tags(trim($search));
+
         return Product::query()
             ->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%$search%")
@@ -27,6 +29,8 @@ class ProductService
 
     public function searchProviderProducts($search, $providerId): LengthAwarePaginator
     {
+        $search = strip_tags(trim($search));
+        
         return Product::query()
         ->where(function ($query) use ($search, $providerId) {
             $query->when($providerId, function ($query, $providerId) {
