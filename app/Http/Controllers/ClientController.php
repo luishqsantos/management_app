@@ -3,12 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use App\Http\Requests\ClientStoreRequest;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Services\ClientService;
+use App\Http\Requests\ClientStoreRequest;
 
 class ClientController extends Controller
 {
+
+    protected $clientService;
+
+    /**
+     * __construct
+     *
+     * @param  ClientService $clientService
+     * @return void
+     */
+    public function __construct(ClientService $clientService)
+    {
+        $this->clientService = $clientService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +33,8 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        $clients = Client::paginate(10);
+        $search = $request->query('search');
+        $clients = $this->clientService->search($search);
 
         return view('app.client.index', ['clients' => $clients, 'request' => $request->all()]);
     }

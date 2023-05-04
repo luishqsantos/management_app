@@ -7,10 +7,26 @@ use App\Client;
 use App\Product;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Services\OrderService;
 use App\Http\Requests\OrderStoreRequest;
 
 class OrderController extends Controller
 {
+
+    protected $orderService;
+
+    /**
+     * __construct
+     *
+     * @param  OrderService $orderService
+     * @return void
+     */
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +35,10 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::with(['products','products.productStock'])->orderByDesc('id')->paginate(10);
+        
+        $search = $request->query('search');
+        $orders = $this->orderService->search($search);
+
         return view('app.order.index', ['orders' => $orders, 'request' => $request->all()]);
     }
 

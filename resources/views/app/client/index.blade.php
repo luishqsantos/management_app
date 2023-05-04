@@ -28,6 +28,10 @@
                 <div class="card-header">
                     <h5 class="card-title mb-0">Lista de Clientes</h5>
                 </div>
+
+                @component('app.layouts._partials.search')
+                @endcomponent
+                
                 <div class="table-responsive">
                     <table class="table table-hover my-0">
                         <thead>
@@ -80,7 +84,7 @@
 
                     <div class="container-fluid text-center mt-3">
 
-                        {{ $clients->appends($request)->links('app.layouts._partials.pagination') }}
+                        {{ $clients->links('app.layouts._partials.pagination') }}
 
                         <p>
                             Exibindo {{ $clients->count() }} cliente(s) de {{ $clients->total() }} (de
