@@ -52,11 +52,11 @@
         new Chart(document.getElementById("chartjs-dashboard-line"), {
             type: "line",
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
-                    "Dec"
+                labels: ["Jan", "Fev", "Mar", "Abr", "Maio", "Jun", "Jul", "Ago", "Set", "Out", "Nov",
+                    "Dez"
                 ],
                 datasets: [{
-                    label: "Sales ($)",
+                    label: "Quantidade",
                     fill: true,
                     backgroundColor: gradient,
                     borderColor: window.theme.primary,
@@ -116,18 +116,59 @@
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+
+        function generateRandomColor() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return `rgba(${r}, ${g}, ${b}, 1)`;
+        }
+
+        var estados = [
+            "AC - Acre",
+            "AL - Alagoas",
+            "AP - Amapá",
+            "AM - Amazonas",
+            "BA - Bahia",
+            "CE - Ceará",
+            "DF - Distrito Federal",
+            "ES - Espírito Santo",
+            "GO - Goiás",
+            "MA - Maranhão",
+            "MT - Mato Grosso",
+            "MS - Mato Grosso do Sul",
+            "MG - Minas Gerais",
+            "PA - Pará",
+            "PB - Paraíba",
+            "PR - Paraná",
+            "PE - Pernambuco",
+            "PI - Piauí",
+            "RJ - Rio de Janeiro",
+            "RN - Rio Grande do Norte",
+            "RS - Rio Grande do Sul",
+            "RO - Rondônia",
+            "RR - Roraima",
+            "SC - Santa Catarina",
+            "SP - São Paulo",
+            "SE - Sergipe",
+            "TO - Tocantins"
+        ];
+
+        var cores = [];
+
+        for (let i = 0; i < estados.length; i++) {
+            cores[i] = generateRandomColor();
+        }
+
+        console.log(cores)
         // Pie chart
         new Chart(document.getElementById("chartjs-dashboard-pie"), {
             type: "pie",
             data: {
-                labels: ["Chrome", "Firefox", "IE"],
+                labels: estados,
                 datasets: [{
-                    data: [4306, 3801, 1689],
-                    backgroundColor: [
-                        window.theme.primary,
-                        window.theme.warning,
-                        window.theme.danger
-                    ],
+                    data: Object.keys(estados),
+                    backgroundColor: cores,
                     borderWidth: 5
                 }]
             },
@@ -144,17 +185,22 @@
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Bar chart
-        new Chart(document.getElementById("chartjs-dashboard-bar"), {
-            type: "bar",
+        var ctx = document.getElementById("chartjs-dashboard-line-2").getContext("2d");
+        var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+        gradient.addColorStop(0, "rgba(36,186,125, 1)");
+        gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+
+        // line chart
+        new Chart(document.getElementById("chartjs-dashboard-line-2"), {
+            type: "line",
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
-                    "Dec"
+                labels: ["Jan", "Fev", "Mar", "Abr", "Maio", "Jun", "Jul", "Ago", "Set", "Out", "Nov",
+                    "Dez"
                 ],
                 datasets: [{
-                    label: "This year",
-                    backgroundColor: window.theme.primary,
-                    borderColor: window.theme.primary,
+                    label: "Ano Corrente",
+                    backgroundColor: gradient,
+                    borderColor: window.theme.success,
                     hoverBackgroundColor: window.theme.primary,
                     hoverBorderColor: window.theme.primary,
                     data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
@@ -235,7 +281,7 @@
             map: "world",
             selector: "#world_map",
             zoomButtons: true,
-            markers: markers,
+            //markers: markers,
             markerStyle: {
                 initial: {
                     r: 9,
@@ -248,7 +294,13 @@
                     stroke: window.theme.primary
                 }
             },
-            zoomOnScroll: false
+            zoomOnScroll: true,
+            regionStyle: {
+                // Everything in initial property can be overwritten here
+                hover: {
+                    fill: 'blue'
+                }
+            }
         });
         window.addEventListener("resize", () => {
             map.updateSize();
