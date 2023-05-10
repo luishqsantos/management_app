@@ -15,7 +15,8 @@ class CreateAccessLogsTable extends Migration
     {
         Schema::create('access_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('log', 200);
+            $table->string('ip', 20);
+            $table->string('route', 200);
             $table->timestamps();
         });
     }
