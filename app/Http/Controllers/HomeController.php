@@ -26,7 +26,6 @@ class HomeController extends Controller
     {
         $dataDashboard = $this->homeService->dataDashboard();
 
-        //dd($dataDashboard->monthOrders);
         return view('app.home', ['dataDashboard' => $dataDashboard]);
     }
 }

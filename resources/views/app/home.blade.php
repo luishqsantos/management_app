@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="stat text-primary">
-                                <i class="align-middle" data-feather="truck"></i>
+                                <i class="align-middle" data-feather="users"></i>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="stat text-primary">
-                                <i class="align-middle" data-feather="users"></i>
+                                <i class="align-middle" data-feather="mouse-pointer"></i>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="stat text-primary">
-                                <i class="align-middle" data-feather="shopping-cart"></i>
+                                <i class="align-middle" data-feather="package"></i>
                             </div>
                         </div>
                     </div>
@@ -139,23 +139,6 @@
                                 <canvas id="chartjs-dashboard-pie"></canvas>
                             </div>
                         </div>
-
-                        {{-- <table class="table table-responsive mb-0">
-                            <tbody>
-                                <tr>
-                                    <td>Chrome</td>
-                                    <td class="text-end">4306</td>
-                                </tr>
-                                <tr>
-                                    <td>Firefox</td>
-                                    <td class="text-end">3801</td>
-                                </tr>
-                                <tr>
-                                    <td>IE</td>
-                                    <td class="text-end">1689</td>
-                                </tr>
-                            </tbody>
-                        </table> --}}
                     </div>
                 </div>
             </div>
