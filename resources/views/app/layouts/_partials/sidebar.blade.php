@@ -38,6 +38,12 @@
                     <i class="align-middle" data-feather="package"></i> <span class="align-middle">Produto</span>
                 </a>
             </li>
+
+            <li class="sidebar-item {{ request()->routeIs('contact.index') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('contact.index') }}">
+                    <i class="align-middle" data-feather="mail"></i> <span class="align-middle">Messagens de Contatos</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

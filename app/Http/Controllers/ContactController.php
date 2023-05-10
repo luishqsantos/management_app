@@ -2,32 +2,87 @@
 
 namespace App\Http\Controllers;
 
-use App\Reason;
 use App\SiteContact;
 use Illuminate\Http\Request;
-use App\Http\Requests\ContactStoreRequest;
+use Illuminate\View\View;
 
 class ContactController extends Controller
 {
-    public function contact(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return View
+     */
+    public function index()
     {
-        return view('site.contact', [
-            'reason' => Reason::all()
-        ]);
+        //->orderBy('id', 'desc')
+        $contacts = SiteContact::with('reason')->paginate(10);
+        return view('app.contact.index', compact('contacts'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ContactStoreRequest $request
-     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(ContactStoreRequest $request)
+    public function store(Request $request)
     {
-        $redirectRouteName = $request->input('redirectRouteName');
+        //
+    }
 
-        SiteContact::create($request->all());
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\SiteContact  $siteContact
+     * @return \Illuminate\Http\Response
+     */
+    public function show(SiteContact $siteContact)
+    {
+        //
+    }
 
-        return redirect()->route($redirectRouteName)->with('message', 'Mensagem de contato enviada com sucesso!')->with('color', 'success');
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\SiteContact  $siteContact
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(SiteContact $siteContact)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\SiteContact  $siteContact
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, SiteContact $siteContact)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\SiteContact  $siteContact
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(SiteContact $siteContact)
+    {
+        //
     }
 }

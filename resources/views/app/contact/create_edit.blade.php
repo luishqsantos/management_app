@@ -1,15 +1,15 @@
-@extends('site.layouts.basic')
+@extends('app.layouts.basic')
 
-@section('title', 'Contato')
+@section('title', isset($product->id) ? 'Editar' : 'Cadastrar')
 
 @section('content')
     <div class=" container-fluid mb-3">
         <div class="row">
             <div class="col justify-content-start">
-                <h1 class="text-align-middle my-1">Entre em contato conosco</h1>
+                <h3 class="text-align-middle my-1">Cadastrar Produtos</h3>
             </div>
             <div class="col container-fluid text-end">
-                <a class="btn btn-primary text-white ms-2" href="{{ route('site.index') }}">
+                <a class="btn btn-primary text-white ms-2" href="{{ route('product.index') }}">
                     Voltar
                 </a>
             </div>
@@ -22,7 +22,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="m-sm-4">
-                            @component('site.layouts._components.form_contact', ['reason' => $reason])
+                            @component('app.product._components.form_create_edit', [
+                                'product' => isset($product) ? $product : '',
+                                'providers' => $providers,
+                                'units' => $units,
+                            ])
                             @endcomponent
                         </div>
                     </div>
@@ -30,5 +34,4 @@
             </div>
         </div>
     </div>
-
 @endsection

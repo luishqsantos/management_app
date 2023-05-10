@@ -17,8 +17,8 @@ Route::get('/', 'MainController@main')->name('site.index');
 
 Route::get('/about', 'AboutController@about')->name('site.about');
 
-Route::post('/contact', 'ContactController@store')->name('site.contact');
-Route::get('/contact', 'ContactController@contact')->name('site.contact');
+Route::post('/contact', 'SiteContactController@store')->name('site.contact');
+Route::get('/contact', 'SiteContactController@index')->name('site.contact');
 
 
 Route::get('/login/{error?}', 'LoginController@index')->name('site.login');
@@ -51,6 +51,9 @@ Route::middleware('authentication')
 
     //Produtos detalhes
     Route::resource('product-detail', 'ProductDetailController');
+
+    //Contatos
+    Route::resource('contact', 'ContactController');
 
 });
 
