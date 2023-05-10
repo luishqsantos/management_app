@@ -36,7 +36,7 @@ class ClientController extends Controller
         $search = $request->query('search');
         $clients = $this->clientService->search($search);
 
-        return view('app.client.index', ['clients' => $clients, 'request' => $request->all()]);
+        return view('app.client.index', ['clients' => $clients]);
     }
 
     /**

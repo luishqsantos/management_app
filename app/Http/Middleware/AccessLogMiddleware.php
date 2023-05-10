@@ -21,7 +21,8 @@ class AccessLogMiddleware
         $uri = $request->getRequestUri();
 
         AccessLog::create([
-            'log' => "IP: $ip requisitou a rota: $uri"
+            'ip'    => $ip,
+            'route' => $uri
         ]);
 
         return $next($request);
