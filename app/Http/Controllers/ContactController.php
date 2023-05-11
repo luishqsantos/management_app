@@ -16,7 +16,8 @@ class ContactController extends Controller
     public function index()
     {
         //->orderBy('id', 'desc')
-        $contacts = SiteContact::with('reason')->paginate(10);
+        $contacts = SiteContact::with('reason')->orderBy('status', 'desc')->orderByDesc('id')->paginate(10);
+
         return view('app.contact.index', compact('contacts'));
     }
 
@@ -72,7 +73,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, SiteContact $siteContact)
     {
-        //
+        dd($request->get('status'));
     }
 
     /**

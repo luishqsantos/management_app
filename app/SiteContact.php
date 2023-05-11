@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class SiteContact extends Model
 {
-    protected $fillable = ['name', 'telephone', 'email', 'reason_id', 'message'];
+    protected $fillable = ['name', 'telephone', 'email', 'reason_id', 'message', 'status'];
 
     public function reason()
     {
