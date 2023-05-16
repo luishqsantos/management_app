@@ -13,10 +13,10 @@ class ContactController extends Controller
      *
      * @return View
      */
-    public function index()
+    public function index(Request $request)
     {
-        //->orderBy('id', 'desc')
-        $contacts = SiteContact::with('reason')->orderBy('status', 'desc')->orderByDesc('id')->paginate(10);
+        $status = $request->query('status') ?? 1;
+        $contacts = SiteContact::with('reason')->where('status', $status)->orderByDesc('id')->paginate(5);
 
         return view('app.contact.index', compact('contacts'));
     }

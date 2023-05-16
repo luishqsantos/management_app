@@ -47,8 +47,8 @@
                                 <li><a class="dropdown-item" href="{{ route('contact.edit', $contact->id) }}">Editar</a>
                                 </li>
 
-                                <li class="dropdown-item">
-                                    <form action="{{ route('contact.update', $contact->id) }}" method="post"
+                                <li>
+                                    <form  class="dropdown-item" action="{{ route('contact.update', $contact->id) }}" method="post"
                                         id="form_destroy_{{ $contact->id }}">
                                         @method('PUT')
                                         @csrf

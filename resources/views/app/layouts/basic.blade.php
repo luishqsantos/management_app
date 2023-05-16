@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons/font/bootstrap-icons.css') }}">
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/croppie.css') }}" />
     <title>Super Gestão - @yield('title')</title>
