@@ -3,11 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\SiteContact;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Services\ContactService;
 
 class ContactController extends Controller
 {
+
+    protected $contactService;
+
+    /**
+     * __construct
+     *
+     * @param  ContactService $contactService
+     * @return void
+     */
+    public function __construct(ContactService $contactService)
+    {
+        $this->contactService = $contactService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +31,11 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
+
+        $search = $request->query('search');
         $status = $request->query('status') ?? 1;
-        $contacts = SiteContact::with('reason')->where('status', $status)->orderByDesc('id')->paginate(5);
+
+        $contacts = $this->contactService->search($search, $status);
 
         return view('app.contact.index', compact('contacts'));
     }
