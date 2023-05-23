@@ -10,7 +10,7 @@ class ContactService
     public function search($search, $status): LengthAwarePaginator
     {
         $search = strip_tags(trim($search));
-        
+
         return SiteContact::with(['reason'])
             ->where('status', $status)
             ->where(function ($query) use ($search) {
@@ -24,5 +24,15 @@ class ContactService
             })
             ->orderByDesc('id')
             ->paginate(5);
+    }
+
+    public function getQuantityMessages()
+    {
+        $quatityMessages = (object)[
+            'read'   => SiteContact::where('status', 0)->count(),
+            'unread' => SiteContact::where('status', 1)->count()
+        ];
+
+        return $quatityMessages;
     }
 }

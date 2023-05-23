@@ -24,17 +24,15 @@
                     <h5 class="card-title mb-0">Caixa de Mensagens</h5>
                 </div>
 
-                @component('app.layouts._partials.search')
-                @endcomponent
-
                 <div class="email-app mb-4">
                     @component('app.contact._components.contact_nav', [
                         'quantityMessages' => $quantityMessages,
+                        'status'           => $contact->status
                     ])
                     @endcomponent
 
-                    @component('app.contact._components.contact_list', [
-                        'contacts' => $contacts,
+                    @component('app.contact._components.message_view', [
+                        'contact' => $contact,
                     ])
                     @endcomponent
                 </div>

@@ -36,8 +36,9 @@ class ContactController extends Controller
         $status = $request->query('status') ?? 1;
 
         $contacts = $this->contactService->search($search, $status);
+        $quantityMessages = $this->contactService->getQuantityMessages();
 
-        return view('app.contact.index', compact('contacts'));
+        return view('app.contact.index', compact('contacts', 'quantityMessages'));
     }
 
     /**
@@ -64,12 +65,15 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SiteContact  $siteContact
-     * @return \Illuminate\Http\Response
+     * @param  \App\SiteContact  $contact
+     * @param Request $request
+     * @return View
      */
-    public function show(SiteContact $siteContact)
+    public function show(Request $request, SiteContact $contact)
     {
-        //
+        $quantityMessages = $this->contactService->getQuantityMessages();
+
+        return view('app.contact.contact_show', compact('contact', 'quantityMessages'));
     }
 
     /**

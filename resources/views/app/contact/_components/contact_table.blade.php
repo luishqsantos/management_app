@@ -22,15 +22,9 @@
                     <td class="d-none d-xl-table-cell">{{ $contact->email }}</td>
                     <td>
                         @php
-                            if ($contact->reason_id == 1) {
-                                $color = 'warning';
-                            } elseif ($contact->reason_id == 2) {
-                                $color = 'success';
-                            } elseif ($contact->reason_id == 3) {
-                                $color = 'info';
-                            }
+                            $color = [1 => 'warning', 2 => 'success', 3 => 'info'];
                         @endphp
-                        <span class="badge bg-{{ $color }}">{{ $contact->reason->reason }}</span>
+                        <span class="badge bg-{{ $color[$contact->reason_id] }}">{{ $contact->reason->reason }}</span>
                     </td>
                     <td>
                         <div class="btn-group dropstart">
