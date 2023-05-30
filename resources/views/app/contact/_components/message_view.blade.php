@@ -3,7 +3,7 @@
 @endphp
 <div class="container-fluid p-0">
 
-    <div class="card m-3 border border-{{ $color[$contact->reason_id] }} border-3 rounded-3">
+    <div class="card m-3 border border-{{ $color[$contact->reason_id] }} border-3 rounded-3 shadow-lg">
         <div class="card-header">
             <div class="container-fluid d-flex  px-0 mb-3">
                 <span
@@ -29,25 +29,39 @@
         </div>
     </div>
 
-
-    <div class="card mt-6">
-        <div class="card-body">
-            <div class="container-fluid px-0 mb-3">
-                <form action="" method="post">
-                    <div class="row">
-                        <div class="col-12">
-                            <textarea class="form-control" id="text-editor" rows="2"></textarea>
-                        </div>
-                        <div class="col-12 text-end mt-3">
-                            <button class="btn btn-lg btn-success" type="submit"><i data-feather="send"></i> Enviar
-                                Resposta</button>
-                        </div>
-                    </div>
-                </form>
+    @if (isset($contact->reply->site_contact_id))
+        <div class="card m-3 border border-grey border-3 rounded-3 shadow-lg">
+            <div class="card-header">
+                <div class="container-fluid px-0">
+                    <span class="text-body"> <i class="bi-reply-fill text-success fs-3"></i>
+                        {{ $contact->reply->created_at->format('d/m/y H:i') }}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                {!! $contact->reply->message !!}
             </div>
         </div>
-    </div>
+    @else
+        <div class="card">
+            <div class="card-body">
+                <div class="container-fluid px-0 mb-3">
+                    <form action="{{ route('contact.reply') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="site_contact_id" value="{{ $contact->id }}">
+                        <textarea class="form-control" id="text-editor" name="message"></textarea>
+
+                        <div class="container-fluid text-end mt-3">
+                            <button class="btn btn-lg btn-success text-end" type="submit"><i data-feather="send"></i>
+                                Enviar
+                                Resposta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
+
 
 @section('script')
     <script src="{{ asset('js/pt_br.js') }}"></script>

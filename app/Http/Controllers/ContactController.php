@@ -6,6 +6,7 @@ use App\SiteContact;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\ContactService;
+use App\SiteContactReply;
 
 class ContactController extends Controller
 {
@@ -108,5 +109,27 @@ class ContactController extends Controller
     public function destroy(SiteContact $siteContact)
     {
         //
+    }
+
+    public function reply(Request $request)
+    {
+        // Valida os dados do formulário conforme suas necessidades
+        $validatedData = $request->validate([
+            'site_contact_id' => 'required|exists:site_contacts,id',
+            'message'         => 'required|string',
+        ]);
+
+        // Crie uma nova resposta
+        $reply = new SiteContactReply();
+        $reply->site_contact_id = $validatedData['site_contact_id'];
+        $reply->message = $validatedData['message'];
+        $reply->save();
+
+        // Atualiza a mensagem como lida
+        $message = SiteContact::findOrFail($validatedData['site_contact_id']);
+        $message->status = 0;
+        $message->save();
+
+        return back()->with('message', 'Resposta Enviada com sucesso.')->with('color', 'success');
     }
 }

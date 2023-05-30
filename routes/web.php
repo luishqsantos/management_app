@@ -45,8 +45,6 @@ Route::middleware('authentication')
     //Pedidos do Produto
     Route::get('/product-order/create/{order}', 'ProductOrderController@create')->name('product_order.create');
     Route::post('/product-order/store/{order}', 'ProductOrderController@store')->name('product_order.store');
-
-    //Route::delete('/product-order/store/{order}/{product}', 'ProductOrderController@destroy')->name('product_order.destroy');
     Route::delete('/product-order/store/{productOrder}', 'ProductOrderController@destroy')->name('product_order.destroy');
 
     //Produtos detalhes
@@ -54,6 +52,7 @@ Route::middleware('authentication')
 
     //Contatos
     Route::resource('contact', 'ContactController');
+    Route::post('/contact/reply', 'ContactController@reply')->name('contact.reply');
 
 });
 

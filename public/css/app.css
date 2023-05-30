@@ -96,7 +96,7 @@ body {
     line-height: var(--bs-body-line-height);
     margin: 0;
     text-align: var(--bs-body-text-align);
-    min-width: 500px;
+    min-width: 600px;
 }
 
 hr {
@@ -15062,7 +15062,7 @@ span.flatpickr-weekday {
 }
 
 .email-app nav {
-    flex: 0 0 200px;
+    flex: 0 0 60px;
 
     border-right: 1px solid #e1e6ef
 }
@@ -15071,7 +15071,7 @@ span.flatpickr-weekday {
     flex-direction: column
 }
 
-a.nav-link.active {
+a.nav-link.active-message {
     background: linear-gradient(90deg, rgba(34, 46, 60, 0.9), rgba(34,149,245, 0.77) 99%);
     border-left: 3px solid;
     border-left-color: #3b7ddd ;
@@ -15153,10 +15153,6 @@ a.nav-link.active {
 @media (max-width:500px) {
     .email-app {
         flex-direction: column
-    }
-
-    .email-app nav {
-        flex: 0 0 100%
     }
 }
 
