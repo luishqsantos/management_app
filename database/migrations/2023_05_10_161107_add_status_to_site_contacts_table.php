@@ -14,7 +14,7 @@ class AddStatusToSiteContactsTable extends Migration
     public function up()
     {
         Schema::table('site_contacts', function (Blueprint $table) {
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(true);
         });
     }
 

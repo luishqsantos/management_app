@@ -6,13 +6,22 @@
     <div class="card m-3 border border-{{ $color[$contact->reason_id] }} border-3 rounded-3 shadow-lg">
         <div class="card-header">
             <div class="container-fluid d-flex  px-0 mb-3">
-                <span
-                    class="badge bg-{{ $color[$contact->reason_id] }} me-auto my-1">{{ $contact->reason->reason }}</span>
-                <a href="#" class="btn btn-info btn-sm ms-1"
-                    title="Marcar como {{ $contact->status ? 'lida' : 'não lida' }}">
-                    <i class="bi-{{ $contact->status ? 'envelope-open' : 'envelope' }}"></i>
-                </a>
-                <a href="#" class="btn btn-danger btn-sm ms-1" title="Excluir"><i class="bi-trash"></i></a>
+                <span class="badge bg-{{ $color[$contact->reason_id] }} me-auto my-1">{{ $contact->reason->reason }}</span>
+
+                <form action="{{ route('contact.update', $contact->id) }}" method="post"
+                    id="form_update_{{ $contact->id }}">
+                    @method('PUT')
+                    @csrf
+                    <input type="hidden" name="status" value="{{ $contact->status ? 0 : 1 }}">
+                    <a class="btn btn-info btn-sm ms-1" onclick="formUpdate({{ $contact->id }})" title="Marcar como {{ $contact->status ? 'lida' : 'não lida' }}"><i class="bi-{{ $contact->status ? 'envelope-open' : 'envelope' }}"></i></a>
+                </form>
+
+                <form action="{{ route('contact.destroy', $contact->id) }}" method="post"
+                    id="form_destroy_{{ $contact->id }}">
+                    @method('DELETE')
+                    @csrf
+                    <a href="#" class="btn btn-danger btn-sm ms-1" onclick="formSubmit({{ $contact->id }})"><i class="bi-trash"></i></a>
+                </form>
             </div>
             <div class="container-fluid px-0 d-flex justify-content-between">
                 <h3 class="text-body">{{ $contact->name }}</h3>

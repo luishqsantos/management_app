@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\SiteContact;
+use App\SiteContactReply;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\ContactService;
-use App\SiteContactReply;
+use App\Http\Requests\ContactReplyRequest;
 
 class ContactController extends Controller
 {
@@ -43,27 +44,6 @@ class ContactController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\SiteContact  $contact
@@ -78,58 +58,66 @@ class ContactController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\SiteContact  $siteContact
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SiteContact $siteContact)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SiteContact  $siteContact
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, SiteContact $siteContact)
+    public function update(Request $request, $id)
     {
-        dd($request->get('status'));
+        $contact = SiteContact::find($id);
+
+        $status = $request->get('status');
+
+        $contact->update([
+            'status' => $status
+        ]);
+
+        $message = !$status ? 'lida' : 'não lida';
+
+        return back()->with('message', "Mensagem marcada como ".$message)->with('color', 'success');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SiteContact  $siteContact
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function destroy(SiteContact $siteContact)
+    public function destroy($id)
     {
-        //
+        $contact = SiteContact::find($id);
+
+        //Exclui a resposta da mensagem caso exista
+        if ($contact->reply()->exists()) {
+            $contact->reply->delete();
+        }
+
+        $contact->delete();
+
+        return redirect()->route('contact.index')->with('message', 'Mensagem excluida com sucesso')->with('color', 'success');
     }
 
-    public function reply(Request $request)
+    /**
+     * Reply the the specified message.
+     *
+     * @param  ContactReplyRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function reply(ContactReplyRequest $request)
     {
-        // Valida os dados do formulário conforme suas necessidades
-        $validatedData = $request->validate([
-            'site_contact_id' => 'required|exists:site_contacts,id',
-            'message'         => 'required|string',
-        ]);
-
         // Crie uma nova resposta
         $reply = new SiteContactReply();
-        $reply->site_contact_id = $validatedData['site_contact_id'];
-        $reply->message = $validatedData['message'];
+        $reply->site_contact_id = $request->site_contact_id;
+        $reply->message         = $request->message;
         $reply->save();
 
         // Atualiza a mensagem como lida
-        $message = SiteContact::findOrFail($validatedData['site_contact_id']);
+        $message = SiteContact::findOrFail($request->site_contact_id);
         $message->status = 0;
         $message->save();
 
-        return back()->with('message', 'Resposta Enviada com sucesso.')->with('color', 'success');
+        return back()->with('message', 'Resposta enviada com sucesso.')->with('color', 'success');
     }
 }

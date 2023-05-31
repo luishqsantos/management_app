@@ -34,19 +34,19 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" id="contact_show_{{ $contact->id }}"
+                                <li class="dropdown-item"><a id="contact_show_{{ $contact->id }}"
                                         data-value="{{ route('contact.show', $contact->id) }}"
                                         onclick="contactShow({{ $contact->id }})">Visualizar</a></li>
 
-                                <li><a class="dropdown-item" href="{{ route('contact.edit', $contact->id) }}">Editar</a>
+                                <li class="dropdown-item"><a href="{{ route('contact.edit', $contact->id) }}">Editar</a>
                                 </li>
 
-                                <li>
-                                    <form  class="dropdown-item" action="{{ route('contact.update', $contact->id) }}" method="post"
-                                        id="form_destroy_{{ $contact->id }}">
+                                <li class="dropdown-item">
+                                    <form action="{{ route('contact.update', $contact->id) }}"
+                                        method="post" id="form_destroy_{{ $contact->id }}">
                                         @method('PUT')
                                         @csrf
-                                        <input type="hidden" name="status" value="{{!$contact->status}}">
+                                        <input type="hidden" name="status" value="{{ $contact->status ? 0 : 1 }}">
                                         <a class="text-black" onclick="formSubmit({{ $contact->id }})">Marcar como
                                             {{ $contact->status ? 'lida' : 'não lida' }}</a>
                                     </form>

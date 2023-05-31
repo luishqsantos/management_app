@@ -363,6 +363,14 @@ function formSubmit(id) {
 }
 
 /**
+ * Submit form update
+ */
+function formUpdate(id) {
+    let form_update = document.querySelector(`#form_update_${id}`);
+    form_update.submit();
+}
+
+/**
  * Only call `feather.replace` once on each page Icons
  */
 feather.replace();

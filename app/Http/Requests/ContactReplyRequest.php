@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactStoreRequest extends FormRequest
+class ContactReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,8 @@ class ContactStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'            => 'required|min:3|max:40|unique:site_contacts',
-            'telephone'       => 'required|min:8|max:15',
-            'email'           => 'email|required',
-            'reason_id'       => 'required',
-            'message'         => 'required|max:200|string',
+            'site_contact_id' => 'required|exists:site_contacts,id',
+            'message'         => 'required|max:1000|string',
         ];
     }
-
 }
