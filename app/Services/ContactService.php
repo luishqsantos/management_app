@@ -41,7 +41,7 @@ class ContactService
             ->when(!$replied, function ($query) {
                 $query->whereDoesntHave('reply');
             })
-            ->orderByDesc('id')
+            ->orderByDesc('updated_at')
             ->paginate(5);
     }
 
