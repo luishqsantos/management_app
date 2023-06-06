@@ -18,7 +18,7 @@ class ContactController extends Controller
      * __construct
      *
      * @param  ContactService $contactService
-     * @return void
+     *
      */
     public function __construct(ContactService $contactService)
     {
@@ -29,6 +29,7 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
     public function index(Request $request)
@@ -49,7 +50,7 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SiteContact  $contact
+     * @param  SiteContact  $contact
      * @param Request $request
      * @return View
      */
@@ -63,7 +64,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int $id
      * @return \Illuminate\Http\RedirectResponse
      */
