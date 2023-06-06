@@ -12,14 +12,16 @@
                             <li class="dropdown-item"><a href="{{ route('contact.show', $contact->id) }}">Visualizar</a></li>
                             </li>
                             <li class="dropdown-item">
-                                <form action="{{ route('contact.update', $contact->id) }}"
-                                    method="post" id="form_update_{{ $contact->id }}">
-                                    @method('PUT')
-                                    @csrf
-                                    <input type="hidden" name="status" value="{{ $contact->status ? 0 : 1 }}">
-                                    <a class="text-black" onclick="formUpdate({{ $contact->id }})">Marcar como
-                                        {{ $contact->status ? 'lida' : 'não lida' }}</a>
-                                </form>
+                                @if(!isset($contact->reply->message))
+                                    <form action="{{ route('contact.update', $contact->id) }}"
+                                        method="post" id="form_update_{{ $contact->id }}">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="status" value="{{ $contact->status ? 0 : 1 }}">
+                                        <a class="text-black" onclick="formUpdate({{ $contact->id }})">Marcar como
+                                            {{ $contact->status ? 'lida' : 'não lida' }}</a>
+                                    </form>
+                                @endif
                             </li>
                             <li class="dropdown-item">
                                 <form action="{{ route('contact.destroy', $contact->id) }}" method="post"

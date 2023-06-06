@@ -7,15 +7,15 @@
         <div class="card-header">
             <div class="container-fluid d-flex  px-0 mb-3">
                 <span class="badge bg-{{ $color[$contact->reason_id] }} me-auto my-1">{{ $contact->reason->reason }}</span>
-
-                <form action="{{ route('contact.update', $contact->id) }}" method="post"
-                    id="form_update_{{ $contact->id }}">
-                    @method('PUT')
-                    @csrf
-                    <input type="hidden" name="status" value="{{ $contact->status ? 0 : 1 }}">
-                    <a class="btn btn-info btn-sm ms-1" onclick="formUpdate({{ $contact->id }})" title="Marcar como {{ $contact->status ? 'lida' : 'não lida' }}"><i class="bi-{{ $contact->status ? 'envelope-open' : 'envelope' }}"></i></a>
-                </form>
-
+                @if(!isset($contact->reply->message))
+                    <form action="{{ route('contact.update', $contact->id) }}" method="post"
+                        id="form_update_{{ $contact->id }}">
+                        @method('PUT')
+                        @csrf
+                        <input type="hidden" name="status" value="{{ $contact->status ? 0 : 1 }}">
+                        <a class="btn btn-info btn-sm ms-1" onclick="formUpdate({{ $contact->id }})" title="Marcar como {{ $contact->status ? 'lida' : 'não lida' }}"><i class="bi-{{ $contact->status ? 'envelope-open' : 'envelope' }}"></i></a>
+                    </form>
+                @endif
                 <form action="{{ route('contact.destroy', $contact->id) }}" method="post"
                     id="form_destroy_{{ $contact->id }}">
                     @method('DELETE')

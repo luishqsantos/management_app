@@ -34,11 +34,14 @@ class ContactController extends Controller
     public function index(Request $request)
     {
 
-        $search = $request->query('search');
-        $status = $request->query('status') ?? 1;
+        $search  = $request->query('search');
+        $status  = $request->query('status') ?? 1;
+        $replied = $request->query('replied') ?? 0;
 
-        $contacts = $this->contactService->search($search, $status);
+        $contacts = $this->contactService->search($search, $status, $replied);
+
         $quantityMessages = $this->contactService->getQuantityMessages();
+
 
         return view('app.contact.index', compact('contacts', 'quantityMessages'));
     }
@@ -118,6 +121,6 @@ class ContactController extends Controller
         $message->status = 0;
         $message->save();
 
-        return back()->with('message', 'Resposta enviada com sucesso.')->with('color', 'success');
+        return redirect()->route('contact.index',['status'=> 0, 'replied' => 1])->with('message', 'Resposta enviada com sucesso.')->with('color', 'success');
     }
 }

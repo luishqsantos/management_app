@@ -27,7 +27,8 @@
                 <div class="email-app mb-4">
                     @component('app.contact._components.contact_nav', [
                         'quantityMessages' => $quantityMessages,
-                        'status'           => $contact->status
+                        'status'           => $contact->status,
+                        'replied'          => $contact->reply()->exists()
                     ])
                     @endcomponent
 
