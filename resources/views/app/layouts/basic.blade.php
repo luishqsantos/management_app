@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-icons/font/bootstrap-icons.css') }}">
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/croppie.css') }}" />
     <title>Super Gestão - @yield('title')</title>
@@ -39,6 +41,7 @@
 
 <!-- croppie.js -->
 <script src="{{ asset('js/croppie.js') }}"></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/js/froala_editor.pkgd.min.js'></script>
 
 <script src="{{ asset('js/script.js') }}"></script>
 

@@ -2,32 +2,126 @@
 
 namespace App\Http\Controllers;
 
-use App\Reason;
 use App\SiteContact;
+use App\SiteContactReply;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
-use App\Http\Requests\ContactStoreRequest;
+use App\Services\ContactService;
+use App\Http\Requests\ContactReplyRequest;
 
 class ContactController extends Controller
 {
-    public function contact(Request $request)
+
+    protected $contactService;
+
+    /**
+     * __construct
+     *
+     * @param  ContactService $contactService
+     *
+     */
+    public function __construct(ContactService $contactService)
     {
-        return view('site.contact', [
-            'reason' => Reason::all()
-        ]);
+        $this->contactService = $contactService;
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request)
+    {
+
+        $search  = $request->query('search');
+        $status  = $request->query('status') ?? 1;
+        $replied = $request->query('replied') ?? 0;
+
+        $contacts = $this->contactService->search($search, $status, $replied);
+
+        $quantityMessages = $this->contactService->getQuantityMessages();
+
+
+        return view('app.contact.index', compact('contacts', 'quantityMessages'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified resource.
      *
-     * @param  ContactStoreRequest $request
+     * @param  SiteContact  $contact
+     * @param Request $request
+     * @return View
+     */
+    public function show(Request $request, SiteContact $contact)
+    {
+        $quantityMessages = $this->contactService->getQuantityMessages();
+
+        return view('app.contact.contact_show', compact('contact', 'quantityMessages'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $contact = SiteContact::find($id);
+
+        $status = $request->get('status');
+
+        $contact->update([
+            'status' => $status
+        ]);
+
+        $message = !$status ? 'lida' : 'não lida';
+
+        return back()->with('message', "Mensagem marcada como ".$message)->with('color', 'success');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function store(ContactStoreRequest $request)
+    public function destroy($id)
     {
-        $redirectRouteName = $request->input('redirectRouteName');
+        $contact = SiteContact::find($id);
 
-        SiteContact::create($request->all());
+        //Exclui a resposta da mensagem caso exista
+        if ($contact->reply()->exists()) {
+            $contact->reply->delete();
+        }
 
-        return redirect()->route($redirectRouteName)->with('message', 'Mensagem de contato enviada com sucesso!')->with('color', 'success');
+        $contact->delete();
+
+        return redirect()->route('contact.index')->with('message', 'Mensagem excluida com sucesso')->with('color', 'success');
+    }
+
+    /**
+     * Reply the the specified message.
+     *
+     * @param  ContactReplyRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function reply(ContactReplyRequest $request)
+    {
+        // Crie uma nova resposta
+        $reply = new SiteContactReply();
+        $reply->site_contact_id = $request->site_contact_id;
+        $reply->message         = $request->message;
+        $reply->save();
+
+        // Atualiza a mensagem como lida
+        $message = SiteContact::findOrFail($request->site_contact_id);
+        $message->status = 0;
+        $message->save();
+
+        return redirect()->route('contact.index',['status'=> 0, 'replied' => 1])->with('message', 'Resposta enviada com sucesso.')->with('color', 'success');
     }
 }

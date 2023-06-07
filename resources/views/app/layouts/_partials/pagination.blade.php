@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav>
+    <div>
         <ul class="pagination justify-content-center">
             {{-- Link para a primeira página --}}
             @if ($paginator->onFirstPage())

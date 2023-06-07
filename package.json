@@ -16,10 +16,12 @@
         "lodash": "^4.17.13",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
-        "sass-loader": "^8.0.0"
+        "sass-loader": "^8.0.0",
+        "vue-template-compiler": "^2.7.14"
     },
     "dependencies": {
         "croppie": "^2.6.5",
+        "froala-editor": "^4.0.19",
         "sweetalert2": "^11.7.3"
     }
 }

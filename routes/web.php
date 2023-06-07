@@ -17,8 +17,8 @@ Route::get('/', 'MainController@main')->name('site.index');
 
 Route::get('/about', 'AboutController@about')->name('site.about');
 
-Route::post('/contact', 'ContactController@store')->name('site.contact');
-Route::get('/contact', 'ContactController@contact')->name('site.contact');
+Route::post('/contact', 'SiteContactController@store')->name('site.contact');
+Route::get('/contact', 'SiteContactController@index')->name('site.contact');
 
 
 Route::get('/login/{error?}', 'LoginController@index')->name('site.login');
@@ -45,12 +45,14 @@ Route::middleware('authentication')
     //Pedidos do Produto
     Route::get('/product-order/create/{order}', 'ProductOrderController@create')->name('product_order.create');
     Route::post('/product-order/store/{order}', 'ProductOrderController@store')->name('product_order.store');
-
-    //Route::delete('/product-order/store/{order}/{product}', 'ProductOrderController@destroy')->name('product_order.destroy');
     Route::delete('/product-order/store/{productOrder}', 'ProductOrderController@destroy')->name('product_order.destroy');
 
     //Produtos detalhes
     Route::resource('product-detail', 'ProductDetailController');
+
+    //Contatos
+    Route::resource('contact', 'ContactController');
+    Route::post('/contact/reply', 'ContactController@reply')->name('contact.reply');
 
 });
 

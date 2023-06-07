@@ -24,11 +24,11 @@ class ContactStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required|min:3|max:40|unique:site_contacts',
-            'telephone' => 'required|min:8|max:15',
-            'email'     => 'email|required',
-            'reason_id' => 'required',
-            'message'   => 'required|max:200',
+            'name'            => 'required|min:3|max:40|unique:site_contacts',
+            'telephone'       => 'required|min:8|max:15',
+            'email'           => 'email|required',
+            'reason_id'       => 'required',
+            'message'         => 'required|max:200|string',
         ];
     }
 
