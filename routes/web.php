@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,14 +22,10 @@ Route::post('/contact', 'SiteContactController@store')->name('site.contact');
 Route::get('/contact', 'SiteContactController@index')->name('site.contact');
 
 
-Route::get('/login/{error?}', 'LoginController@index')->name('site.login');
-Route::post('/login', 'LoginController@authLogin')->name('site.login');
-
-Route::middleware('authentication')
+Route::middleware('auth')
 ->prefix('/app')->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('app.home');
-    Route::get('/logout', 'LoginController@logout')->name('app.logout');
 
     //Fornecedores
     Route::resource('provider', 'ProviderController');
@@ -59,3 +56,7 @@ Route::middleware('authentication')
 Route::fallback(function () {
     echo "Desculpe! O endedeço digitado não existe.";
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
