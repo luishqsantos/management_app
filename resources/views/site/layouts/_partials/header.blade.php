@@ -22,7 +22,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('site.login') ? 'active' : '' }}" href="{{ route('site.login') }}">Login</a>
+                    <a class="nav-link {{ request()->routeIs('site.login') ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
                 </li>
             </ul>
         </div>

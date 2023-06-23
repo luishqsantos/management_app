@@ -96,7 +96,7 @@
                                     <div class="text-dark">Vanessa Tucker</div>
                                     <div class="text-muted small mt-1">
                                         Nam pretium turpis et arcu. Duis arcu
-                                            tortor.
+                                        tortor.
                                     </div>
                                     <div class="text-muted small mt-1">15m ago</div>
                                 </div>
@@ -158,8 +158,9 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                     data-bs-toggle="dropdown">
-                    <img src="{{ asset('img/logo.png') }}" class="avatar img-fluid rounded me-1" alt="usuário logo" />
-                    <span class="text-dark">Charles Hall</span>
+                    <img src="{{ asset('img/logo.png') }}" class="avatar img-fluid rounded me-1"
+                        alt="usuário logo" />
+                    <span class="text-dark">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end mx-4">
                     <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
@@ -172,7 +173,12 @@
                     <a class="dropdown-item" href="#"><i class="align-middle me-1"
                             data-feather="help-circle"></i> Help Center</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('app.logout') }}">Log out</a>
+                    <a class="dropdown-item" type="submit">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="border-0 bg-transparent" type="submit">Sair</button>
+                        </form>
+                    </a>
                 </div>
             </li>
         </ul>
