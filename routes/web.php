@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,49 +13,50 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Home Site
 Route::get('/', 'MainController@main')->name('site.index');
 
+//sobre
 Route::get('/about', 'AboutController@about')->name('site.about');
 
-Route::post('/contact', 'SiteContactController@store')->name('site.contact');
-Route::get('/contact', 'SiteContactController@index')->name('site.contact');
+//Contato
+Route::resource('/contact', 'SiteContactController')->only(['index', 'store'])->name('index', 'site.contact');
 
+//Auth Login
+Route::prefix('')->group(base_path('routes/auth/login.php'));
 
-Route::middleware('auth')
-->prefix('/app')->group(function () {
+//Auth Email
+Route::prefix('')->group(base_path('routes/auth/email.php'));
 
-    Route::get('/home', 'HomeController@index')->name('app.home');
+//Auth
+Route::prefix('')->group(base_path('routes/auth/password.php'));
+
+//Auth Register
+Route::middleware('auth')->prefix('')->group(base_path('routes/auth/register.php'));
+
+//Admin
+Route::middleware('auth')->prefix('/app')->group(function () {
+
+    //Home Admin
+    Route::get('/', 'HomeController@index')->name('app.home');
 
     //Fornecedores
-    Route::resource('provider', 'ProviderController');
+    Route::prefix('')->group(base_path('routes/web/provider.php'));
 
     //Produtos
-    Route::resource('product', 'ProductController');
+    Route::prefix('')->group(base_path('routes/web/product.php'));
 
     //Clientes
-    Route::resource('client', 'ClientController');
+    Route::prefix('')->group(base_path('routes/web/client.php'));
 
     //Pedido
-    Route::resource('order', 'OrderController');
-
-    //Pedidos do Produto
-    Route::get('/product-order/create/{order}', 'ProductOrderController@create')->name('product_order.create');
-    Route::post('/product-order/store/{order}', 'ProductOrderController@store')->name('product_order.store');
-    Route::delete('/product-order/store/{productOrder}', 'ProductOrderController@destroy')->name('product_order.destroy');
-
-    //Produtos detalhes
-    Route::resource('product-detail', 'ProductDetailController');
+    Route::prefix('')->group(base_path('routes/web/order.php'));
 
     //Contatos
-    Route::resource('contact', 'ContactController');
-    Route::post('/contact/reply', 'ContactController@reply')->name('contact.reply');
-
+    Route::prefix('')->group(base_path('routes/web/contact.php'));
 });
+
 
 Route::fallback(function () {
-    echo "Desculpe! O endedeço digitado não existe.";
+    return view('fallback.fallback');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
