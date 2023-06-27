@@ -54,6 +54,9 @@ Route::middleware('auth')->prefix('/app')->group(function () {
 
     //Contatos
     Route::prefix('')->group(base_path('routes/web/contact.php'));
+
+    //Usuarios
+    Route::prefix('')->group(base_path('routes/web/user.php'));
 });
 
 
