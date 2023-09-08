@@ -60,11 +60,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" id="client_show_{{ $user->id }}"
-                                                        data-value="{{ route('client.show', $user->id) }}"
-                                                        onclick="clientShow({{ $user->id }})">Visualizar</a></li>
                                                 <li><a class="dropdown-item"
-                                                        href="{{ route('client.edit', $user->id) }}">Editar</a></li>
+                                                        href="{{ route('user.edit', $user->id) }}">Editar</a></li>
                                                 <li class="dropdown-item">
                                                     <form action="{{ route('client.destroy', $user->id) }}"
                                                         method="post" id="form_destroy_{{ $user->id }}">

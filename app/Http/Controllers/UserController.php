@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\UserService;
-use Illuminate\View\View;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -36,37 +37,28 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit(User $user)
     {
-        //
+        return view('auth.register', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UserUpdateRequest  $request
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        //
+        $user->update($request->all());
+
+        return redirect()->route('user.edit', $user->id)->with('message', 'Usuário atualizado com sucesso!')->with('color', 'success');
     }
 
     /**
