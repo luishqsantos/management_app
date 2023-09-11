@@ -62,8 +62,10 @@
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item"
                                                         href="{{ route('user.edit', $user->id) }}">Editar</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('reset.password', $user->id) }}">Alterar Senha</a></li>
                                                 <li class="dropdown-item">
-                                                    <form action="{{ route('client.destroy', $user->id) }}"
+                                                    <form action="{{ route('user.destroy', $user->id) }}"
                                                         method="post" id="form_destroy_{{ $user->id }}">
                                                         @method('DELETE')
                                                         @csrf

@@ -71,4 +71,15 @@ class UserController extends Controller
     {
         //
     }
+
+    /**
+     * Display the form to request a password reset link.
+     *
+     * @param User $user
+     * @return \Illuminate\View\View
+     */
+    public function getResetPasswordForm(User $user)
+    {
+        return view('auth.passwords.email', ['name' => $user->name, 'email' => $user->email]);
+    }
 }
