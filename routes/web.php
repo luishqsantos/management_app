@@ -31,14 +31,15 @@ Route::prefix('')->group(base_path('routes/auth/email.php'));
 //Auth
 Route::prefix('')->group(base_path('routes/auth/password.php'));
 
-//Auth Register
-Route::middleware('auth')->prefix('')->group(base_path('routes/auth/register.php'));
 
 //Admin
 Route::middleware('auth')->prefix('/app')->group(function () {
 
     //Home Admin
     Route::get('/', 'HomeController@index')->name('app.home');
+
+    //Auth Register
+    Route::prefix('')->group(base_path('routes/auth/register.php'));
 
     //Fornecedores
     Route::prefix('')->group(base_path('routes/web/provider.php'));
@@ -54,6 +55,9 @@ Route::middleware('auth')->prefix('/app')->group(function () {
 
     //Contatos
     Route::prefix('')->group(base_path('routes/web/contact.php'));
+
+    //Usuarios
+    Route::prefix('')->group(base_path('routes/web/user.php'));
 });
 
 
