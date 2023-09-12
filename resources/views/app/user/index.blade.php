@@ -17,6 +17,7 @@
     </div>
     <div class="row">
 
+        
         @if (session('message'))
             <div class="alert alert-{{ session('color') }}" role="alert">
                 {{ session('message') }}

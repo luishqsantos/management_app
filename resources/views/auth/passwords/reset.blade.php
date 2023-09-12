@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-secondary">
-                                    {{ __('Enviar Link') }}
+                                    {{ __('Redefinir') }}
                                 </button>
                             </form>
                         </div>
