@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons/font/bootstrap-icons.css') }}">
     <link href='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/croppie.css') }}" />

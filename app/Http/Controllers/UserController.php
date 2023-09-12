@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
@@ -26,6 +27,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
     public function index(Request $request)
@@ -52,24 +54,41 @@ class UserController extends Controller
      *
      * @param  UserUpdateRequest  $request
      * @param  \App\User  $user
-     * @return
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function update(UserUpdateRequest $request, User $user)
     {
         $user->update($request->all());
 
-        return redirect()->route('user.edit', $user->id)->with('message', 'Usuário atualizado com sucesso!')->with('color', 'success');
+        return redirect()->route('user.edit', $user->id)->with('message', 'Usuário atualizado com sucesso.')->with('color', 'success');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('user.index')->with('message', 'Usuário não encontrado.')->with('color', 'danger');
+        }
+
+        // Verifica se há um usuário autenticado
+        // Verifique se o ID do usuário autenticado corresponde ao ID a ser excluído
+        $AuthUser = Auth::user();
+        if ($AuthUser->id == $id) {
+
+            return redirect()->route('user.index')->with('message', 'Você não pode excluir sua própria conta enquanto estiver logado.')->with('color', 'danger');
+        }
+
+        $user->delete();
+
+        return redirect()->route('user.index')->with('message', 'Usuário excluído com sucesso.')->with('color', 'success');
     }
 
     /**

@@ -1,16 +1,25 @@
 @php
-    function active($route)
+    /**
+     * Responsável por receber o nome da rota e comparar com o nome da rota atual retornando como true o atributo "active" da navbar
+     * @param mixed $routeName
+     * @return string
+     */
+    function active($routeName)
     {
-        return str_contains(
-            request()
-                ->route()
-                ->getName(),
-            $route,
-        )
-            ? 'active'
-            : '';
+        $currentRouteName = request()->route()->getName();
+
+        if (is_array($routeName)) {
+            foreach ($routeName as $key => $value) {
+                if (str_contains($currentRouteName,$value)) {
+                    return 'active';
+                }
+            }
+        } else {
+            return str_contains($currentRouteName,$routeName) ? 'active' : '';
+        }
     }
 @endphp
+
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index.html">
@@ -59,7 +68,7 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{ active('user') }}">
+            <li class="sidebar-item {{ active(['user', 'register', 'reset']) }}">
                 <a class="sidebar-link" href="{{ route('user.index') }}">
                     <i class="bi-person-gear me-2" style="font-size: 1.5rem;"></i>
                     <span class="align-middle">Usuários</span>
