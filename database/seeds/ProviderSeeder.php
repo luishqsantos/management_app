@@ -12,11 +12,6 @@ class ProviderSeeder extends Seeder
      */
     public function run()
     {
-        Provider::create([
-            'name'  => 'Fornecedor Z',
-            'site'  => 'www.fornecedorz.com',
-            'uf'    => 'AM',
-            'email' => 'fornecedorz@hotmail.com'
-        ]);
+        factory(Provider::class, 5)->create();
     }
 }

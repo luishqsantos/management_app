@@ -12,6 +12,6 @@ class SiteContactSeeder extends Seeder
      */
     public function run()
     {
-        factory(SiteContact::class, 100)->create();
+        factory(SiteContact::class, 10)->create();
     }
 }

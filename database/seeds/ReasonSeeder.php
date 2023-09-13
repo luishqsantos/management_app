@@ -12,8 +12,11 @@ class ReasonSeeder extends Seeder
      */
     public function run()
     {
-        Reason::create(['reason' => 'Dúvida']);
-        Reason::create(['reason' => 'Elogio']);
-        Reason::create(['reason' => 'Contato']);
+        //É extremamente importante manter a ordem e os IDs para que não quebre a aplicação
+        Reason::create([
+            ['id' => 1, 'reason' => 'Dúvida'],
+            ['id' => 2, 'reason' => 'Elogio'],
+            ['id' => 3, 'reason' => 'Contato']
+        ]);
     }
 }
