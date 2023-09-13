@@ -14,7 +14,7 @@ class AlterProvidersNewColumns extends Migration
     public function up()
     {
         Schema::table('providers', function (Blueprint $table) {
-            $table->string('email', 50)->after('site');
+            $table->string('email', 50)->after('name');
             $table->string('uf', 2)->after('email');
         });
     }
