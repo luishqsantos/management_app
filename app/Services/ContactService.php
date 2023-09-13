@@ -53,7 +53,7 @@ class ContactService
     public function getQuantityMessages()
     {
         $quatityMessages = (object)[
-            'read'    => SiteContact::where('status', 0)->count(),
+            'read'    => SiteContact::where('status', 0)->whereDoesntHave('reply')->count(),
             'unread'  => SiteContact::where('status', 1)->count(),
             'replied' => SiteContact::whereHas('reply')->count()
         ];
