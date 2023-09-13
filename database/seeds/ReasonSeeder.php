@@ -13,10 +13,14 @@ class ReasonSeeder extends Seeder
     public function run()
     {
         //É extremamente importante manter a ordem e os IDs para que não quebre a aplicação
-        Reason::create([
+        $reasons = [
             ['id' => 1, 'reason' => 'Dúvida'],
             ['id' => 2, 'reason' => 'Elogio'],
-            ['id' => 3, 'reason' => 'Contato']
-        ]);
+            ['id' => 3, 'reason' => 'Contato'],
+        ];
+
+        foreach ($reasons as $reasonData) {
+            Reason::create($reasonData);
+        }
     }
 }
