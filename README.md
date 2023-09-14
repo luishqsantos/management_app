@@ -1,7 +1,12 @@
 # Super Gestão - Sistema de Gestão Empresarial
 
+## Estado Atual
+
+Este projeto está atualmente em desenvolvimento ativo para adicionar novos recursos, aprimorar a funcionalidade existente e corrigir quaisquer problemas relatados. Fique à vontade para contribuir, reportar problemas ou acompanhar o progresso do desenvolvimento.
+
 ## Descrição
 O projeto Super Gestão é um ERP (Enterprise Resource Planning) que tem como objetivo principal o gerenciamento de estoque, produtos, fornecedores, pedidos e clientes de forma simples e objetiva. Possui uma interface de fácil compreensão para auxiliar o usuário na administração eficaz de sua empresa.
+
 
 ## Requisitos
 - PHP 7.4.3

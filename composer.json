@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "luishenrique/super-gestao",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "O projeto Super Gestão é um ERP (Enterprise Resource Planning) que tem como objetivo principal o gerenciamento de estoque, produtos, fornecedores, pedidos e clientes de forma simples e objetiva. Possui uma interface de fácil compreensão para auxiliar o usuário na administração eficaz de sua empresa.",
     "keywords": [
         "framework",
         "laravel"
