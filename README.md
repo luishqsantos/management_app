@@ -14,45 +14,54 @@ Siga estas etapas para instalar e configurar o Super Gestão em seu ambiente de 
 
 1. Clone o repositório:
 
-git clone https://github.com/luishqsantos/management_app
-
+```shell
+$ git clone https://github.com/luishqsantos/management_app
+```
 2. Navegue até o diretório do projeto:
 
+```shell
 cd management_app
-
+```
 3. Instale as dependências do PHP com o Composer:
 
+```shell
 composer install
-
+```
 4. Crie um arquivo de ambiente `.env` e configure-o com suas informações de banco de dados e outras configurações:
 
+```shell
 cp .env.example .env
-
+```
 Preencha as informações no arquivo `.env`.
 
 5. Gere a chave de criptografia do aplicativo:
 
+```shell
 php artisan key:generate
-
+```
 6. Execute as migrations do banco de dados:
 
+```shell
 php artisan migrate
-
+```
 7. Execute esta seeder para criação de uma credencial de login padrão:
 
+```shell
 php artisan db:seed --class=UserSeeder
 
 email: admin@teste.com
 senha: admin
-
+```
 8. Para popular as tabelas do banco de dados execute as seeders:
 
+```shell
 php artisan db:seed
-
+```
 7. Inicie o servidor de desenvolvimento:
 
+```shell
 php artisan serve
-
+```
 8. Acesse o aplicativo em [http://localhost:8000](http://localhost:8000).
 
 ### Uso
